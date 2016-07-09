@@ -1,0 +1,7 @@
+INFILE=/afs/ir.stanford.edu/users/c/a/camiloa/EE180_S2015/PipelinedProcessor/hw/zed/implementation/system.ncd
+OUTFILE=/afs/ir.stanford.edu/users/c/a/camiloa/EE180_S2015/PipelinedProcessor/hw/zed/implementation/system.bit
+FAMILY=Zynq
+PART=xc7z020-1clg484
+WORKINGDIR=/afs/ir.stanford.edu/users/c/a/camiloa/EE180_S2015/PipelinedProcessor/hw/zed/implementation
+LICENSE=ISE
+USER_INFO=174112364_208276203_210548363_308

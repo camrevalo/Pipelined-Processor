@@ -1,0 +1,6 @@
+the_ROM_image:
+{
+	[bootloader]zed_fsbl.elf
+	/afs/ir.stanford.edu/users/c/a/camiloa/EE180_S2015/PipelinedProcessor/hw/zed/implementation/system.bit
+	u-boot.elf
+}

@@ -1,0 +1,12 @@
+Image rows:  162
+Image columns:  640
+Instruction Memory: tests/sobel_c/build/app.hex
+Input Data Buffer: tests/sobel_c/ibuf.hex
+Output buffer: tests/sobel_c/obuf_test.hex
+  Dumping range: 0x000000000 - 0x000019500
+Running userlogic for maximum of 10000000 cycles
+** VVP Stop(0) **
+** Flushing output streams.
+** Current simulation time is 1418695000 ticks.
+> finish
+** Continue **

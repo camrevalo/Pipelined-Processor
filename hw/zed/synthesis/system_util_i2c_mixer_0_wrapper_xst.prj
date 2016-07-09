@@ -1,0 +1,2 @@
+vhdl util_i2c_mixer_v1_00_a /afs/ir.stanford.edu/users/c/a/camiloa/EE180_S2015/PipelinedProcessor/hw/zed_lib/edk/pcores/util_i2c_mixer_v1_00_a/hdl/vhdl/util_i2c_mixer.vhd
+vhdl work ../hdl/system_util_i2c_mixer_0_wrapper.vhd

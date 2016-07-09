@@ -1,0 +1,22 @@
+
+build/app:     file format elf32-bigmips
+
+
+Disassembly of section .text:
+
+00000000 <boot>:
+       0:	3c108002 	lui	s0,0x8002
+       4:	34110001 	li	s1,0x1
+       8:	34080001 	li	t0,0x1
+       c:	34090000 	li	t1,0x0
+      10:	01098825 	or	s1,t0,t1
+      14:	34023333 	li	v0,0x3333
+      18:	3403cccc 	li	v1,0xcccc
+      1c:	00431025 	or	v0,v0,v1
+      20:	340afff3 	li	t2,0xfff3
+      24:	004a1022 	sub	v0,v0,t2
+      28:	ae020004 	sw	v0,4(s0)
+      2c:	ae110000 	sw	s1,0(s0)
+      30:	0800000c 	j	30 <boot+0x30>
+      34:	00000000 	nop
+	...

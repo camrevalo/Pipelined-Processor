@@ -1,0 +1,59 @@
+[*]
+[*] GTKWave Analyzer v3.3.29 (w)1999-2012 BSI
+[*] Thu Feb 26 08:37:19 2015
+[*]
+[dumpfile] "/afs/ir.stanford.edu/users/c/a/camiloa/EE180_S2015/PipelinedProcessor/sim/tests/beq/streamwave.vcd"
+[dumpfile_mtime] "Thu Feb 26 08:35:28 2015"
+[dumpfile_size] 342460
+[savefile] "/afs/ir.stanford.edu/users/c/a/camiloa/EE180_S2015/PipelinedProcessor/sim/harness/waveformat.gtkw"
+[timestart] 0
+[size] 1436 855
+[pos] 9 0
+*-15.000000 6500 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] userlogic_test.
+[treeopen] userlogic_test.ul.
+[treeopen] userlogic_test.ul.cpu.
+[treeopen] userlogic_test.ul.cpu.if_stage.
+[sst_width] 223
+[signals_width] 210
+[sst_expanded] 1
+[sst_vpaned_height] 287
+@200
+-Top
+@28
+userlogic_test.clk
+userlogic_test.rst_n
+@200
+-Input Buffer
+@22
+userlogic_test.input_buffer.din[31:0]
+userlogic_test.input_buffer.dout[31:0]
+@28
+userlogic_test.input_buffer.we
+@200
+-Output Buffer
+@22
+userlogic_test.output_buffer.din[31:0]
+userlogic_test.output_buffer.dout[31:0]
+@200
+-MIPS
+@22
+userlogic_test.ul.cpu.pc[31:0]
+userlogic_test.ul.cpu.instr[31:0]
+userlogic_test.ul.cpu.alu_op_x_ex[31:0]
+userlogic_test.ul.cpu.alu_op_y_ex[31:0]
+userlogic_test.ul.cpu.alu_result_ex[31:0]
+userlogic_test.ul.cpu.alu_result_mem[31:0]
+userlogic_test.ul.cpu.d_stage.alu_op_y[31:0]
+userlogic_test.ul.cpu.d_stage.alu_op_x[31:0]
+userlogic_test.ul.cpu.d_stage.shift_amount[31:0]
+@28
+userlogic_test.ul.cpu.d_stage.isShiftImm
+userlogic_test.ul.cpu.if_stage.jump_branch
+@23
+userlogic_test.ul.cpu.if_stage.branch_imm[31:0]
+@22
+userlogic_test.ul.cpu.if_stage.pc[31:0]
+userlogic_test.ul.cpu.if_stage.pc_next[31:0]
+[pattern_trace] 1
+[pattern_trace] 0

@@ -1,0 +1,14 @@
+set -tmpdir /afs/ir.stanford.edu/users/c/a/camiloa/EE180_S2015/PipelinedProcessor/hw/zed/synthesis/xst_temp_dir/
+run
+-opt_mode speed
+-netlist_hierarchy as_optimized
+-opt_level 1
+-p xc7z020clg484-1
+-top system_stream_engine_0_wrapper
+-ifmt MIXED
+-ifn system_stream_engine_0_wrapper_xst.prj
+-ofn ../implementation/system_stream_engine_0_wrapper.ngc
+-hierarchy_separator /
+-iobuf NO
+-sd {../implementation}
+-vlgincdir {"/afs/ir.stanford.edu/users/c/a/camiloa/EE180_S2015/PipelinedProcessor/hw/zed/pcores/" "/afs/ir.stanford.edu/users/c/a/camiloa/EE180_S2015/PipelinedProcessor/hw/zed_lib/edk/pcores/" "/afs/ir.stanford.edu/class/ee/xilinx/14.7/ISE_DS/EDK/hw/XilinxBFMinterface/pcores/" "/afs/ir.stanford.edu/class/ee/xilinx/14.7/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/" }

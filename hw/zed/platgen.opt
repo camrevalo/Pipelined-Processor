@@ -1,0 +1,11 @@
+-p
+xc7z020clg484-1
+-lang
+verilog
+-intstyle
+default
+-lp
+/afs/ir.stanford.edu/users/c/a/camiloa/EE180_S2015/PipelinedProcessor/hw/zed_lib/
+-msg
+__xps/ise/xmsgprops.lst
+system.mhs

@@ -1,0 +1,16 @@
+/afs/ir.stanford.edu/users/c/a/camiloa/EE180_S2015/PipelinedProcessor/hw/zed/implementation/system.ngc 1425085994
+/afs/ir.stanford.edu/users/c/a/camiloa/EE180_S2015/PipelinedProcessor/hw/zed/implementation/system_processing_system7_0_wrapper.ngc 1425084500
+/afs/ir.stanford.edu/users/c/a/camiloa/EE180_S2015/PipelinedProcessor/hw/zed/implementation/system_util_vector_logic_0_wrapper.ngc 1425084574
+/afs/ir.stanford.edu/users/c/a/camiloa/EE180_S2015/PipelinedProcessor/hw/zed/implementation/system_axi_i2s_adi_0_wrapper.ngc 1425084590
+/afs/ir.stanford.edu/users/c/a/camiloa/EE180_S2015/PipelinedProcessor/hw/zed/implementation/system_gp_interconnect_wrapper.ngc 1425085898
+/afs/ir.stanford.edu/users/c/a/camiloa/EE180_S2015/PipelinedProcessor/hw/zed/implementation/system_se_control_interconnect_wrapper.ngc 1425085939
+/afs/ir.stanford.edu/users/c/a/camiloa/EE180_S2015/PipelinedProcessor/hw/zed/implementation/system_se_src_interconnect_wrapper.ngc 1425085914
+/afs/ir.stanford.edu/users/c/a/camiloa/EE180_S2015/PipelinedProcessor/hw/zed/implementation/system_se_dst_interconnect_wrapper.ngc 1425085922
+/afs/ir.stanford.edu/users/c/a/camiloa/EE180_S2015/PipelinedProcessor/hw/zed/implementation/system_axi_spdif_tx_0_wrapper.ngc 1425084531
+/afs/ir.stanford.edu/users/c/a/camiloa/EE180_S2015/PipelinedProcessor/hw/zed/implementation/system_axi_dma_stream_wrapper.ngc 1425085931
+/afs/ir.stanford.edu/users/c/a/camiloa/EE180_S2015/PipelinedProcessor/hw/zed/implementation/system_stream_engine_0_wrapper.ngc 1425085889
+/afs/ir.stanford.edu/users/c/a/camiloa/EE180_S2015/PipelinedProcessor/hw/zed/implementation/system_clock_generator_0_wrapper.ngc 1425085906
+/afs/ir.stanford.edu/users/c/a/camiloa/EE180_S2015/PipelinedProcessor/hw/zed/implementation/system_axi_iic_0_wrapper.ngc 1425084551
+/afs/ir.stanford.edu/users/c/a/camiloa/EE180_S2015/PipelinedProcessor/hw/zed/implementation/system_axi_iic_1_wrapper.ngc 1425084621
+/afs/ir.stanford.edu/users/c/a/camiloa/EE180_S2015/PipelinedProcessor/hw/zed/implementation/system_util_i2c_mixer_0_wrapper.ngc 1425084601
+OK

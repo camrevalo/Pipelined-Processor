@@ -1,0 +1,152 @@
+Lab Group: 2
+Partners: Camilo Arevalo, Jai Sajnani
+
+• Description of changes made to the control and datapath to handle hazards and
+forwarding
+
+###############################################################
+LIST OF INSTRUCTIONS IMPLEMENTED
+###############################################################
+1. add      
+	- Came with starter code
+2. addi
+	- Added {`ADDI, `DC6} case to ALU instruction decode switch statement in decode.v to screen for appropriate `ADDI op and set alu_upcode to `ALU_ADD
+	- Fetches a sign-extended version of the immediate value since this is an arithmetic operation ({{16{immediate[15]}}, immediate})
+3. addiu
+	- Came with starter code
+	- Fetches a sign-extended version of the immediate value since this is an arithmetic operation ({{16{immediate[15]}}, immediate})
+4. addu
+	- Came with starter code 
+5. and 
+	- Came with starter code     
+6. andi
+	- Added {`ANDI, `DC6} case to ALU instruction decode switch statement in decode.v to screen for appropriate `ANDI op and set alu_upcode to `ALU_AND
+	- Added a flag wire is_zero_extend that goes high when op == `ANDI
+	- The is_zero_extend wire is high for andi, so the immediate value from the andi instruction is zero-extended ({16'b0, immediate})      
+7. beq
+	- Set jump_branch wire in decode.v high if a branch instruction is read and its condition is met - in this case if op is BEQ and rs_data == rs_data
+	- Feed jump_branch wire into instruction_fetch.v, where it is used in a ternary operator. If jump_branch is satisfied, set next program counter to pc_id_p4 + b_imm, where b_imm is the branch target offset, equal to the sign-extended bottom 16-bits of the instruction multiplied by 4 (shifted left 2)
+8. bgez
+	- Set jump_branch wire in decode.v high if a branch instruction is read and its condition is met - in this case if op is BGEZNL or BGEZAL and rs_data_signed >= 32d'0
+	- Feed jump_branch wire into instruction_fetch.v, where it is used in a ternary operator. If jump_branch is satisfied, set next program counter to pc_id_p4 + b_imm, where b_imm is the branch target offset, equal to the sign-extended bottom 16-bits of the instruction multiplied by 4 (shifted left 2)
+9. bgtz
+    - Set jump_branch wire in decode.v high if a branch instruction is read and its condition is met - in this case if op is BGTZ and rs_data_signed < 32d'0. rs_data_signed is a wire that contains either the forwarded data from the ALU execution stage or the input rs_data.
+    - Feed jump_branch wire into instruction_fetch.v, where it is used in a ternary operator. If jump_branch is satisfied, set next program counter to pc_id_p4 + b_imm, where b_imm is the branch target offset, equal to the sign-extended bottom 16-bits of the instruction multiplied by 4 (shifted left 2)
+10. blez
+    - Set jump_branch wire in decode.v high if a branch instruction is read and its condition is met - in this case if op is BLEZ and rs_data_signed <= 32d'0
+	- Feed jump_branch wire into instruction_fetch.v, where it is used in a ternary operator. If jump_branch is satisfied, set next program counter to pc_id_p4 + b_imm, where b_imm is the branch target offset, equal to the sign-extended bottom 16-bits of the instruction multiplied by 4 (shifted left 2)    
+11. bltz 
+    - Set jump_branch wire in decode.v high if a branch instruction is read and its condition is met - in this case if op is BLTNZL or BLTZAL and ~(rs_data_signed >= 32d'0)
+	- Feed jump_branch wire into instruction_fetch.v, where it is used in a ternary operator. If jump_branch is satisfied, set next program counter to pc_id_p4 + b_imm, where b_imm is the branch target offset, equal to the sign-extended bottom 16-bits of the instruction multiplied by 4 (shifted left 2)       
+12. bne
+	- Set jump_branch wire in decode.v high if a branch instruction is read and its condition is met - in this case if op is BNE and ~(rs_data == rs_data)
+	- Feed jump_branch wire into instruction_fetch.v, where it is used in a ternary operator. If jump_branch is satisfied, set next program counter to pc_id_p4 + b_imm, where b_imm is the branch target offset, equal to the sign-extended bottom 16-bits of the instruction multiplied by 4 (shifted left 2)         
+13. j 
+	- Came with starter code
+	- A jump_target wire is set high in decode.v and fed into instruction_fetch where the program counter is set to the appropriate address based on the processor jump pipeline ({pc_id_p4[31:28], instr_id[25:0], 2'b0})
+14. jal
+	- jump_target and isLINK wires are set high in encode.v to indicate that this instruction is both a jump and a link. This corresponds to another wire, jump_reg, being turned high, which is then fed along with jump_target into instruction_fetch.v. The jump_reg is used in a ternary operator to assign the next program counter as the decoded rs_data output from decode.v, in this case declared as a new wire into instruction_fetch "rs_data_jr". rs_data_jr corresponds to rs_data in this case.
+15. jalr
+	- jump_target and isLINK wires are set high in encode.v to indicate that this instruction is both a jump and a link. This corresponds to another wire, jump_reg, being turned high, which is then fed along with jump_target into instruction_fetch.v. The jump_reg is used in a ternary operator to assign the next program counter as the decoded rs_data output from decode.v, in this case declared as a new wire into instruction_fetch "rs_data_jr". rs_data_jr corresponds to rt_data in this case.      
+16. jr
+	- jump_target and jump_reg wires are set high in encode.v to indicate that this instruction is both a jump and a link. These both feed into instruction_fetch.v. The jump_reg is used in a ternary operator to assign the next program counter as the decoded rs_data output from decode.v, in this case declared as a new wire into instruction_fetch "rs_data_jr". rs_data_jr corresponds to rs_data in this case.
+17. lb
+	- Sets mem_byte signal high in decode.v, which in turn enable a mem_write wire that feeds into regfile.v for the write stage.    
+18. lbu
+	- Sets mem_byte signal high in decode.v and sets mem_signextend low, which ensures that the sub-word is not sign-extended when written.
+19. lui
+	- Came with starter code
+	- Stores immediate value in upper 16-bits of a 32-bit wire with zeros in the lower 16. This value is fed into alu.v as alu_op_y and is passed on untouched as the output.
+20. lw    
+	- Came with starter code
+	- Sets mem_read signal high in decode.v, which in turn enables a mem_write wire that feeds into regfile.v for the write stage.          
+21. movn
+	- Came with starter code
+	- Passes value of rs into rd so long as rt is not zero. This is done by feeding a movn_id wire from decode.v into the memory stage.
+22. movz    
+	- Passes value of rs into rd so long as rt is zero. This is done by feeding a movz_id wire from decode.v into the memory stage        
+23. mul
+	- Added {`SPECIAL2, `MUL} case to ALU instruction decode switch statement in decode.v to screen for appropriate `SPECIAL2 op and set alu_opcode to `ALU_MUL
+	- Added `ALU_MUL case to ALU datapath execute switch statement to multiply two operands in alu.v
+24. nor
+	- Added {`SPECIAL, `NOR} case to ALU instruction decode switch statement in decode.v to screen for appropriate `SPECIAL op and set alu_opcode to `ALU_NOR
+	- Added `ALU_NOR case to ALU datapath execute switch statement to nor two operands in alu.v      
+25. or  
+	- Added {`SPECIAL, `OR} case to ALU instruction decode switch statement in decode.v to screen for appropriate `SPECIAL op and set alu_upcode to `ALU_AND
+	- Added `ALU_OR case to ALU datapath execute switch statement to multiply two operands in alu.v
+26. ori
+	- Came with starter code
+	- Added a flag wire is_zero_extend that goes high when op == `XORI
+	- The is_zero_extend wire is high for xori, so the immediate value from the xori instruction is zero-extended ({16'b0, immediate})       
+27. sb
+	- Came with starter code           
+28. sll
+	- Came with starter code
+	- When SLL instruction is read, the isShift and isShiftImm wires are turned high which in turn assigns a shift_amount wire with a specified immediate amount from the instruction code. 
+	- The shift amount is fed into alu_op_x which then computes a shift on the operand alu_op_y in alu.v
+29. sllv   
+	- When SLLV instruction is read, the isShift wire is turned high which in turn assigns a shift_amount wire with a variable from the instruction code. 
+	- The shift amount is fed into alu_op_x which then computes a shift on the operand alu_op_y in alu.v         
+30. slt
+	- Added {`SPECIAL, `SLT} case to ALU instruction decode switch statement in decode.v to screen for appropriate `SPECIAL op and set alu_opcode to `ALU_SLT
+	- Added `ALU_SLT case to ALU datapath execute switch statement to nor two operands in alu.v               
+31. slti  
+	- Added {`SLTI, `DC6} case to ALU instruction decode switch statement in decode.v to screen for appropriate `SPECIAL op and set alu_opcode to `ALU_SLT
+32. sltiu 
+	- Added {`SLTI, `DC6} case to ALU instruction decode switch statement in decode.v to screen for appropriate `SPECIAL op and set alu_opcode to `ALU_SLTU
+	- Added `ALU_SLTU case to ALU datapath execute switch statement to nor two operands in alu.v            
+33. sltu
+	- Added {`SPECIAL, `SLTU} case to ALU instruction decode switch statement in decode.v to screen for appropriate `SPECIAL op and set alu_opcode to `ALU_SLTU       
+34. sra
+	- When SRA instruction is read, the isShift and isShiftImm wires are turned high which in turn assigns a shift_amount wire with a specified immediate amount from the instruction code
+	- The shift amount is fed into alu_op_x, which is then performed on a sign-casted alu_op_y_signed to achieve the correct arithmetic right shift           
+35. srav   
+	- When SRAV instruction is read, the isShift is turned high which in turn assigns a shift_amount wire with a specified variable amount from the instruction code
+	- The shift amount is fed into alu_op_x, which is then performed on a sign-casted alu_op_y_signed to achieve the correct arithmetic right shift      
+36. srl
+	- When SRL instruction is read, the isShift and isShiftImm wires are turned high which in turn assigns a shift_amount wire with a specified immediate amount from the instruction code. 
+	- The shift amount is fed into alu_op_x which then computes a shift on the operand alu_op_y in alu.v             
+37. srlv  
+	- When SRLV instruction is read, the isShift wire is turned high which in turn assigns a shift_amount wire with a specified variable amount from the instruction code. 
+	- The shift amount is fed into alu_op_x which then computes a shift on the operand alu_op_y in alu.v                       
+38. sub
+	- Added {`SPECIAL, `SUB} case to ALU instruction decode switch statement in decode.v to screen for appropriate `SPECIAL op and set alu_upcode to `ALU_SUB
+	- Added `ALU_SUB case to ALU datapath execute switch statement to bitwise xor two operands in alu.v             
+39. subu 
+	- Added {`SPECIAL, `SUBU} case to ALU instruction decode switch statement in decode.v to screen for appropriate `SPECIAL op and set alu_upcode to `ALU_SUBU
+	- Added `ALU_SUBU case to ALU datapath execute switch statement to bitwise xor two operands in alu.v             
+40. sw      
+	- Sets mem_we signal high in decode.v, which in turn enables a mem_read wire that feeds into regfile.v for the write stage.          
+41. xor
+	- Added {`SPECIAL, `XOR} case to ALU instruction decode switch statement in decode.v to screen for appropriate `SPECIAL op and set alu_upcode to `ALU_XOR
+	- Added `ALU_XOR case to ALU datapath execute switch statement to bitwise xor two operands in alu.v
+42. xori
+	- Added a flag wire is_zero_extend that goes high when op == `XORI
+	- The is_zero_extend wire is high for xori, so the immediate value from the xori instruction is zero-extended ({16'b0, immediate})            
+
+###############################################################
+CHANGES TO CONTROL/DATAPATH FOR HAZARD HANDLING AND FORWARDING
+###############################################################
+
+43. fwd_idrs_ex
+	- Enables forwarding for the rs register from the execution stage of one instruction to the instruction decode stage of the following instruction. 
+	- A wire forward_rs_ex checks if the instruction is a write instruction and has the same write address as rs_addr and rs_addr is not zero; if so is high and can forward to next instruction
+	- If forwarding enabled, rs_data is set to the result from execute stage, effectively skipping the need to wait for the instruction to finish
+44. fwd_idrs_mem
+	- Enables forwarding for the rs register from the memory stage of one instruction to the instruction decode stage of the following instruction.
+	- A wire forward_rs_mem checks if instruction is a write to emmory instruztion, has a non-zero address, and has the same address as the reg_write_addr. If so sets high so that it can forward to next instruction
+	- If forwarding signal is high, first checks if can forward from execute stage; otherwise forwards the write_data from the memory stage to the next instruction's decode stage's rs_data
+45. fwd_idrt_ex   
+	- Enables forwarding for the rt register from the execution stage of one instruction to the instruction decode stage of the following instruction. 
+	- A wire forward_rt_ex checks if the instruction is a write instruction and has the same write address as rs_addr and rs_addr is not zero; if so is high and can forward to next instruction
+	- If forwarding enabled, rt_data is set to the result from execute stage, effectively skipping the need to wait for the instruction to finish
+46. fwd_idrt_mem 
+	- Enables forwarding for the rt register from the memory stage of one instruction to the instruction decode stage of the following instruction.
+	- A wire forward_rt_mem checks if instruction is a write to emmory instruztion, has a non-zero address, and has the same address as the reg_write_addr. If so sets high so that it can forward to next instruction
+	- If forwarding signal is high, first checks if can forward from execute stage; otherwise forwards tthe write_data from the memory stage to the next instruction's decode stage's rt_data
+47. stall_idrs_ex 
+	- Checks if the current instruction has a depdendency on the previous instruction's execution stage for rs_data calculation. If it does, sets the wire rs_Mem_dependency high
+	- If there is a dependency and the current instruction needs to read from rs (determined by checking if instruction is anything other than LUI, jump_target, or a shift that requires an immediate value), then outputs a stall signal from decode.v to mips_cpuv which stalls the instruction using a flip-flop.
+48. stall_idrt_ex
+	- Checks if the current instruction has a depdendency on the previous instruction's execution stage for rt_data calculation. If it does, sets the wire rt_Mem_dependency high
+	- If there is a dependency and the current instruction needs to read from rs (determined by checking if instruction is anything other than LUI, jump_target, ALU immediate operation, or mem_read), then outputs a stall signal from decode.v to mips_cpuv which stalls the instruction using a flip-flop.
